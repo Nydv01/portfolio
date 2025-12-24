@@ -1,73 +1,205 @@
-# React + TypeScript + Vite
+# 🚀 Nitin Yadav — Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **premium, animated, production-ready personal portfolio** built with modern frontend tooling, showcasing my projects, skills, certifications, and engineering philosophy.
 
-Currently, two official plugins are available:
+🌐 **Live Website**: https://nitin-yadav.vercel.app  
+📦 **Repository**: https://github.com/Nydv01/portfolio  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ⚡ Ultra-smooth animations using **Framer Motion**
+- 🎨 Premium glassmorphism & gradient UI
+- 🧠 Engineering-focused content (not just visuals)
+- 📱 Fully responsive (mobile-first optimized)
+- 🧑‍💻 Animated avatar & interactive hero section
+- 📈 Skill radar charts & growth curves
+- 🏆 Certifications & Credly badges carousel
+- 📂 Real-world project showcases
+- 📬 Working contact form with **EmailJS**
+- 🔁 Auto-reply confirmation emails
+- 📅 Calendly meeting booking
+- 🌙 Dark mode support
+- 🚀 Deployed on **Vercel (Free Tier)**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Frontend
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+- shadcn/ui
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Integrations
+- EmailJS (Contact form + Auto reply)
+- Calendly (Call booking)
+- Google Drive (Resume hosting)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Deployment
+- Vercel
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📁 Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+portfolio/
+├── public/
+│ └── favicon.ico
+├── src/
+│ ├── components/
+│ │ ├── Navbar.tsx
+│ │ ├── Footer.tsx
+│ │ ├── PageTransition.tsx
+│ │ ├── SectionHeading.tsx
+│ │ ├── CredlyBadgeCarousel.tsx
+│ │ └── ui/
+│ ├── hooks/
+│ │ └── use-mobile.tsx
+│ ├── pages/
+│ │ ├── Home.tsx
+│ │ ├── About.tsx
+│ │ ├── Skills.tsx
+│ │ ├── Projects.tsx
+│ │ ├── Experience.tsx
+│ │ ├── Certifications.tsx
+│ │ ├── GitHub.tsx
+│ │ ├── Resume.tsx
+│ │ └── Contact.tsx
+│ ├── lib/
+│ │ └── utils.ts
+│ ├── App.tsx
+│ ├── main.tsx
+│ └── index.css
+├── .gitignore
+├── package.json
+├── tailwind.config.ts
+├── vite.config.ts
+└── README.md
+
+
+---
+
+## 🚀 Getting Started Locally
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Nydv01/portfolio.git
+cd portfolio
+
+2️⃣ Install Dependencies
+npm install
+
+3️⃣ Create Environment Variables
+
+Create a .env file in the root directory:
+
+touch .env
+
+
+Add the following:
+
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_ADMIN_TEMPLATE_ID=your_admin_template_id
+VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID=your_autoreply_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+
+
+⚠️ Do not commit .env to GitHub (already ignored).
+
+4️⃣ Run Development Server
+npm run dev
+
+
+Open:
+
+http://localhost:5173
+
+
+📬 Contact Form (EmailJS Setup)
+
+Sends email to admin
+
+Sends auto-reply to user
+
+Template variables used:
+
+{{name}}
+{{email}}
+{{message}}
+
+📦 Build for Production
+npm run build
+
+
+Preview build:
+
+npm run preview
+
+🌍 Deploying on Vercel
+
+Push code to GitHub
+
+Go to https://vercel.com
+
+Import repository
+
+Add environment variables
+
+Deploy
+
+✔️ Free hosting
+✔️ CI/CD enabled
+
+🔗 Custom Domain
+
+Free: *.vercel.app
+
+Paid: .dev, .me, .com
+
+Attach domain directly from Vercel dashboard.
+
+📈 Performance & Optimization
+
+Reduced heavy blur & shadows for mobile
+
+Optimized Framer Motion usage
+
+Lazy-loaded animations
+
+Responsive spacing system
+
+🧠 Engineering Philosophy
+
+“I don’t just write code — I build systems.”
+
+Focused on:
+
+Clean architecture
+
+Scalability
+
+Security awareness
+
+Real-world engineering
+
+📜 License
+
+Open for inspiration.
+Please do not copy directly.
+
+🤝 Connect With Me
+
+🌐 Portfolio: https://nitin-yadav.vercel.app
+
+💼 LinkedIn: https://linkedin.com/in/ydv-nitin
+
+💻 GitHub: https://github.com/Nydv01
+
+📧 Email: ydv.nitin2401@gmail.com
+
+⭐ Star the repo if you like it!
