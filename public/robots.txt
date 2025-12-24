@@ -1,0 +1,7 @@
+# robots.txt
+# Portfolio website – crawl allowed
+
+User-agent: *
+Allow: /
+
+Sitemap: /sitemap.xml
