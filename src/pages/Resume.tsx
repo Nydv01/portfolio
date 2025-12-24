@@ -12,11 +12,11 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /* =========================================================
    DATA
 ========================================================= */
-
 const education = [
   "B.Tech in Computer Science Engineering – VIT Bhopal",
   "Class 10: 90% (Strong academic foundation)",
@@ -152,12 +152,14 @@ function RadarChart({
 }
 
 export default function Resume() {
+  const isMobile = useIsMobile();
+
   return (
+  
     <PageTransition>
       <section className="section-padding relative overflow-hidden min-h-[calc(100vh-4rem)]">
         {/* Premium background */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.18),transparent_65%)]" />
-
         <div className="relative z-10 bg-background">
   <SectionHeading
     title="Resume"
@@ -209,8 +211,13 @@ export default function Resume() {
 
   {/* ================= EDUCATION ================= */}
   <motion.div
-    animate={{ y: [0, -12, 0] }}
-    transition={{ duration: 4, repeat: Infinity }}
+    animate={isMobile ? { y: [0, -6, 0] } : { y: [0, -14, 0] }}
+transition={{
+  duration: isMobile ? 6 : 4,
+  repeat: Infinity,
+  ease: "easeInOut",
+}}
+
     whileHover={{
       scale: 1.06,
       rotateX: 6,

@@ -146,7 +146,8 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="glass-card rounded-3xl p-8 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_40px_120px_-30px_rgba(99,102,241,0.45)]"
+                className="glass-card rounded-3xl p-8 hover:-translate-y-1 transition-all duration-500 hover:shadow-[0_20px_60px_-20px_rgba(0,0,0,0.5)] md:hover:shadow-[0_40px_120px_-30px_rgba(0,0,0,0.6)]
+"
               >
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5">
                   <exp.icon className="h-7 w-7 text-primary" />

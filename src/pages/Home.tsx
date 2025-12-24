@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PageTransition } from "@/components/PageTransition";
-
+import { useIsMobile } from "@/hooks/use-mobile";
 
 /* =========================================================
    FLOATING AVATAR + BLINK
@@ -42,18 +42,22 @@ const stats = [
 ========================================================= */
 
 export default function Home() {
+  const _isMobile = useIsMobile();
   return (
     <PageTransition>
       <section className="relative overflow-hidden min-h-screen">
         {/* ================= BACKGROUND ================= */}
         <div className="absolute inset-0 -z-10 bg-black" />
-        <div className="absolute top-1/4 left-1/4 w-[520px] h-[520px] bg-primary/30 rounded-full blur-[160px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[520px] h-[520px] bg-purple-500/30 rounded-full blur-[160px]" />
+        <div className="absolute top-1/4 left-1/4 w-[520px] h-[520px] bg-primary/30 rounded-full blur-[80px] md:blur-[70px] md:blur-[160px]
+" />
+        <div className="absolute bottom-1/4 right-1/4 w-[520px] h-[520px] bg-purple-500/30 rounded-full blur-[80px] md:blur-[70px] md:blur-[160px]
+" />
 
-        <div className="container-custom px-6 pt-28 pb-40">
+        <div className="container-custom px-4 pt-20 pb-24 sm:px-6 sm:pt-28 sm:pb-40
+">
 
           {/* ================= HERO ================= */}
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center mb-20 md:mb-32">
 
             {/* LEFT CONTENT */}
             <motion.div
@@ -124,13 +128,13 @@ export default function Home() {
 
   {/* OUTER ROTATING AURA */}
   <motion.div
-    animate={{ rotate: 360 }}
+    animate={_isMobile ? {} : { rotate: 360 }}
     transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
     className="absolute"
   >
     <div className="w-72 h-72 rounded-full 
       bg-gradient-to-r from-primary via-purple-500 to-pink-500
-      blur-3xl opacity-40"
+      blur-xl md:blur-3xl opacity-40"
     />
   </motion.div>
 
@@ -142,7 +146,7 @@ export default function Home() {
   >
     <div className="w-60 h-60 rounded-full 
       border border-primary/50 
-      shadow-[0_0_120px_-20px_hsl(var(--primary))]"
+      shadow-[0_0_40px_-10px_hsl(var(--primary))] md:shadow-[0_0_120px_-20px_hsl(var(--primary))]"
     />
   </motion.div>
 
@@ -160,7 +164,7 @@ export default function Home() {
     w-44 h-44 rounded-full
     bg-black/60 backdrop-blur-xl
     border border-white/10
-    shadow-[0_0_80px_-10px_rgba(99,102,241,0.7)]"
+    shadow-[0_0_30px_-8px_rgba(99,102,241,0.6)] md:shadow-[0_0_80px_-10px_rgba(99,102,241,0.7)]"
   >
 
     {/* BLINKING EMOJI */}
@@ -184,7 +188,7 @@ export default function Home() {
 </div>
 
 {/* ================= ENGINEERING IDENTITY ================= */}
-<div className="grid md:grid-cols-3 gap-8 mb-32">
+<div className="grid md:grid-cols-3 gap-8 mb-20 md:mb-32">
             {[
               {
                 icon: Code,
@@ -227,7 +231,7 @@ export default function Home() {
     boxShadow: "0 0 80px rgba(99,102,241,0.45)",
   }}
   transition={{ type: "spring", stiffness: 200, damping: 18 }}
-  className="group max-w-4xl mx-auto mb-32 glass-card rounded-3xl p-12 hover-lift cursor-default"
+  className="group max-w-4xl mx-auto mb-20 md:mb-32 glass-card rounded-3xl p-12 hover-lift cursor-default"
 >
   <h2
     className="
@@ -256,7 +260,7 @@ export default function Home() {
 
 
           {/* ================= JOURNEY CURVE ================= */}
-          <div className="max-w-5xl mx-auto mb-32">
+          <div className="max-w-5xl mx-auto mb-20 md:mb-32">
             <h2 className="text-3xl font-bold text-center mb-12">
               My Engineering Growth Journey
             </h2>
@@ -289,7 +293,7 @@ export default function Home() {
           </div>
 
           {/* ================= STATS ================= */}
-          <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-32">
+          <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto mb-20 md:mb-32">
             {stats.map((stat) => (
               <motion.div
   key={stat.label}
@@ -312,7 +316,7 @@ export default function Home() {
 
   {/* ICON */}
   <motion.div
-    animate={{ rotate: 360 }}
+    animate={_isMobile ? {} : { rotate: 360 }}
     transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
     className="relative z-10 mb-4"
   >

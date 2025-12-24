@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { PageTransition } from "@/components/PageTransition";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Button } from "@/components/ui/button";
@@ -93,11 +94,20 @@ const projects = [
 /* ===========================
    COMPONENT
 =========================== */
-
 export default function Projects() {
   const featuredProjects = projects.filter(p => p.featured);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
+  
     <PageTransition>
       <section className="section-padding overflow-hidden">
         <div className="container-custom">
@@ -123,7 +133,7 @@ export default function Projects() {
                   key={i}
                   className="min-w-[340px] glass-card rounded-3xl p-8 relative overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-purple-500/30 to-pink-500/30 blur-3xl opacity-30" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-purple-500/30 to-pink-500/30 blur-xl md:blur-3xl opacity-30" />
 
                   <div className="relative z-10 text-center">
                     <div className="text-6xl mb-4">{project.image}</div>
@@ -154,15 +164,20 @@ export default function Projects() {
 
                 {/* Feedback Pulse */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                  <div className="absolute -inset-32 bg-gradient-to-r from-primary/25 via-purple-500/25 to-pink-500/25 blur-3xl animate-pulse" />
+                  <div className="absolute -inset-32 bg-gradient-to-r from-primary/25 via-purple-500/25 to-pink-500/25 blur-xl md:blur-3xl animate-pulse" />
                 </div>
 
                 <div className="grid md:grid-cols-[380px_1fr] relative z-10">
                   {/* Visual */}
                   <div className="relative flex items-center justify-center bg-gradient-to-br from-primary/20 via-purple-500/20 to-pink-500/20">
                     <motion.div
-                      animate={{ y: [0, -12, 0] }}
-                      transition={{ duration: 4, repeat: Infinity }}
+                      animate={isMobile ? { y: [0, -6, 0] } : { y: [0, -14, 0] }}
+transition={{
+  duration: isMobile ? 6 : 4,
+  repeat: Infinity,
+  ease: "easeInOut",
+}}
+
                       className="text-8xl"
                     >
                       {project.image}

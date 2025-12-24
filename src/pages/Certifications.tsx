@@ -131,7 +131,7 @@ export default function Certifications() {
           />
 
           {/* ================= CERTIFICATIONS ================= */}
-          <div className="mb-32">
+          <div className="mb-20 md:mb-20 md:mb-32">
             <h3 className="text-2xl font-bold mb-12 flex items-center gap-2">
               <Award className="h-6 w-6 text-primary" />
               Professional Certifications
@@ -206,7 +206,7 @@ export default function Certifications() {
           </div>
 
           {/* ================= SKILL BADGES ================= */}
-<div className="mb-32">
+<div className="mb-20 md:mb-32">
   <h3 className="text-2xl font-bold mb-12 flex items-center gap-2">
     <BadgeCheck className="h-6 w-6 text-primary" />
     Skill Badges (Credly)
@@ -232,7 +232,7 @@ export default function Certifications() {
 
 
           {/* ================= SECURITY × AI ================= */}
-          <div className="mb-32 text-center">
+          <div className="mb-20 md:mb-32 text-center">
             <h3 className="text-2xl font-bold mb-8 flex justify-center gap-2">
               <Lock className="text-primary" />
               Security × AI Expertise

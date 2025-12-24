@@ -75,8 +75,8 @@ export default function Contact() {
       <section className="section-padding relative overflow-hidden min-h-screen">
         {/* Premium background */}
         <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-primary/15 rounded-full blur-[140px]" />
-          <div className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-purple-500/15 rounded-full blur-[140px]" />
+          <div className="absolute top-0 right-0 w-[420px] h-[420px] bg-primary/15 rounded-full blur-[60px] md:blur-[140px]" />
+          <div className="absolute bottom-0 left-0 w-[420px] h-[420px] bg-purple-500/15 rounded-full blur-[60px] md:blur-[140px]" />
         </div>
 
         <div className="container-custom">
