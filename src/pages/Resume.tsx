@@ -192,7 +192,7 @@ export default function Resume() {
             {/* ✅ GOOGLE DRIVE DIRECT DOWNLOAD */}
             <Button asChild size="lg" className="gap-2 glow hover-lift">
               <a
-                href="https://drive.google.com/uc?export=download&id=12lu2BLYCYtQyijJ3BIyDIlbNqIzl42-k"
+                href="https://drive.google.com/uc?export=download&id=1EavgEOGNs1hGFYURhvaC0x_ytoLyuVVw"
                 target="_blank"
                 rel="noopener noreferrer"
               >
