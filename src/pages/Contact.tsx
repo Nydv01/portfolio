@@ -188,10 +188,18 @@ export default function Contact() {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    const nameVal = formData.get("name") as string;
+    const emailVal = formData.get("email") as string;
+    const messageVal = formData.get("message") as string;
+
     const payload = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
+      name: nameVal,
+      email: emailVal,
+      message: messageVal,
+      from_name: nameVal,
+      reply_to: emailVal,
+      to_name: nameVal,
+      send_to: emailVal,
     };
 
     try {

@@ -46,28 +46,33 @@ export default function ContactSection() {
         throw new Error('Missing EmailJS configuration');
       }
 
+      // Create a unified payload mapping all common naming patterns in EmailJS templates
+      const emailParams = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        from_name: formData.name,
+        reply_to: formData.email,
+        to_name: formData.name,
+        send_to: formData.email,
+      };
+
+      // 1️⃣ Send alert email to yourself
       await emailjs.send(
         SERVICE_ID,
         ADMIN_TEMPLATE_ID,
-        {
-          from_name: formData.name,
-          reply_to: formData.email,
-          message: formData.message,
-        },
+        emailParams,
         PUBLIC_KEY
       );
 
-      // Try auto-reply if template is configured
-      const AUTO_REPLY_TEMPLATE_ID = (import.meta as any).env.VITE_EMAILJS_AUTOREPLY_TEMPLATE_ID;
+      // 2️⃣ Try sending auto-reply email to visitor if template is configured
+      const AUTO_REPLY_TEMPLATE_ID = (import.meta as any).env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID;
       if (AUTO_REPLY_TEMPLATE_ID) {
         try {
           await emailjs.send(
             SERVICE_ID,
             AUTO_REPLY_TEMPLATE_ID,
-            {
-              to_name: formData.name,
-              send_to: formData.email,
-            },
+            emailParams,
             PUBLIC_KEY
           );
         } catch (autoErr) {
