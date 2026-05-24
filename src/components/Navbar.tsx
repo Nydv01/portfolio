@@ -79,20 +79,30 @@ export function Navbar() {
 
             {/* Desktop Links */}
             <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className={cn(
-                    "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    isActive(link.href)
-                      ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className={cn(
+                      "relative rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                      active
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                  >
+                    {active && (
+                      <motion.span
+                        layoutId="activeNav"
+                        className="absolute inset-0 -z-10 rounded-lg bg-primary/10 border border-primary/20 shadow-[0_0_15px_hsl(var(--primary)/0.25)]"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    {link.label}
+                  </Link>
+                );
+              })}
             </div>
 
             {/* Actions */}

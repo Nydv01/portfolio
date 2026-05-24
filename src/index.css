@@ -7,62 +7,68 @@
 ========================================================= */
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --background: 240 5% 96%; /* Apple Pro Silver-White #f5f5f7 */
+  --foreground: 240 10% 12%; /* Apple Obsidian Gray #1d1d1f */
 
-  --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --card: 0 0% 100%; /* Pure White Card Base #ffffff */
+  --card-foreground: 240 10% 12%;
 
-  --primary: 262 83% 58%;
+  --primary: 240 6% 15%; /* Deep Slate-Titanium for Apple style high contrast */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 240 4.8% 95.9%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
+  --secondary: 240 5% 91%; /* Light Slate grey */
+  --muted: 240 5% 93%;
+  --muted-foreground: 240 4% 46%; /* Medium Slate-Gray #6e6e73 */
 
-  --accent: 262 83% 95%;
-  --border: 240 5.9% 90%;
+  --accent: 240 5% 88%;
+  --border: 240 6% 84%; /* Precision silver-slate line #d2d2d7 */
 
   --radius: 0.75rem;
 
-  --gradient-start: 262 83% 58%;
-  --gradient-mid: 280 87% 50%;
-  --gradient-end: 326 78% 55%;
+  --gradient-start: 240 5% 15%; /* Brushed titanium deep shadow */
+  --gradient-mid: 240 4% 35%; /* Mid steel */
+  --gradient-end: 240 3% 55%; /* Silver chrome */
 
-  --glow: 262 83% 58%;
+  --glow: 240 6% 35%;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
+  --background: 0 0% 0%; /* Absolute Premium Pure Black */
+  --foreground: 0 0% 100%;
 
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 5%; /* Pure Obsidian Black Card Base */
+  --card-foreground: 0 0% 100%;
 
-  --primary: 262 83% 65%;
-  --secondary: 240 3.7% 15.9%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
+  --primary: 39 15% 69%; /* Brushed Natural Titanium */
+  --secondary: 0 0% 8%;
+  --muted: 0 0% 6%;
+  --muted-foreground: 39 5% 64%; /* Warm Muted Grey */
 
-  --accent: 262 40% 20%;
-  --border: 240 3.7% 20%;
+  --accent: 0 0% 12%; 
+  --border: 0 0% 11%; /* Brushed aluminum border */
 
-  --gradient-start: 262 83% 65%;
-  --gradient-mid: 280 87% 60%;
-  --gradient-end: 326 78% 65%;
+  --gradient-start: 0 0% 100%; /* Titanium highlight */
+  --gradient-mid: 39 15% 69%; /* Natural Titanium mid-tone */
+  --gradient-end: 39 8% 40%; /* Brushed Space Grey/Charcoal */
 
-  --glow: 262 83% 65%;
+  --glow: 39 15% 69%;
 }
+
 
 /* =========================================================
    BASE RESET & GLOBAL BEHAVIOR
-========================================================= */
+ ========================================================= */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   border-color: hsl(var(--border));
+}
+
+html,
+body {
+  overflow-x: hidden;
 }
 
 html {
@@ -85,58 +91,165 @@ button {
 
 /* =========================================================
    COMPONENT UTILITIES (USED ACROSS SITE)
-========================================================= */
+ ========================================================= */
 
-.gradient-text {
-  background: linear-gradient(
-    90deg,
-    hsl(var(--gradient-start)),
-    hsl(var(--gradient-mid)),
-    hsl(var(--gradient-end))
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
+@layer components {
+  .container-custom {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 96rem; /* 1536px */
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 
-.glass-card {
-  background: hsl(var(--card) / 0.7);
-  backdrop-filter: blur(22px);
-  border: 1px solid hsl(var(--border) / 0.35);
-  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.35);
-  border-radius: var(--radius);
-}
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--gradient-start)),
+      hsl(var(--gradient-mid)),
+      hsl(var(--gradient-end))
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
 
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 
-.glass {
-  background: hsl(var(--background) / 0.8);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid hsl(var(--border) / 0.4);
-}
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-top: 7rem;
+      padding-bottom: 7rem;
+    }
+  }
 
-.glow {
-  box-shadow: 0 0 50px -15px hsl(var(--glow) / 0.5);
-}
+  .glass-card {
+    background: hsl(var(--card) / 0.91);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--border) / 0.85);
+    box-shadow: 
+      0 8px 30px rgba(0, 0, 0, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.02),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
 
-/* Premium hover feel */
-.hover-lift {
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
+  .dark .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.15),
+      inset 0 1px 1px rgba(255, 255, 255, 0.08),
+      0 25px 60px -15px rgba(0, 0, 0, 0.5);
+  }
 
-.hover-lift:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.45);
-}
-.premium-chip {
-  padding: 0.45rem 0.85rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border-radius: 999px;
-  background: hsl(var(--card) / 0.75);
-  backdrop-filter: blur(14px);
-  border: 1px solid hsl(var(--border) / 0.4);
-  box-shadow: 0 12px 40px -15px rgba(0,0,0,0.6);
-  white-space: nowrap;
+  .glass-card:hover {
+    border-color: hsl(var(--border));
+    box-shadow: 
+      0 20px 40px -8px rgba(0, 0, 0, 0.08),
+      inset 0 1px 1px rgba(255, 255, 255, 0.95),
+      0 0 35px -8px hsl(var(--primary) / 0.06);
+  }
+
+  .dark .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 
+      0 4px 30px rgba(0, 0, 0, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15),
+      0 35px 80px -20px rgba(0, 0, 0, 0.6),
+      0 0 40px -10px hsl(var(--primary) / 0.15);
+  }
+
+  .glass-panel {
+    background: hsl(var(--card) / 0.93);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--border) / 0.85);
+    box-shadow: 
+      0 12px 30px -10px rgba(0, 0, 0, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.01);
+    border-radius: var(--radius);
+  }
+
+  .dark .glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-panel-elevated {
+    background: hsl(var(--card) / 0.95);
+    backdrop-filter: blur(30px);
+    border: 1px solid hsl(var(--border));
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 0, 0, 0.08),
+      0 1px 3px rgba(0, 0, 0, 0.02);
+    border-radius: var(--radius);
+  }
+
+  .dark .glass-panel-elevated {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+  }
+
+  .glass {
+    background: hsl(var(--background) / 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid hsl(var(--border) / 0.7);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  .dark .glass {
+    background: hsl(var(--background) / 0.8);
+    border-bottom: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: none;
+  }
+
+  .glow {
+    box-shadow: 0 0 50px -15px hsl(var(--glow) / 0.5);
+  }
+
+  .hover-lift {
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 40px 100px -30px rgba(0, 0, 0, 0.45);
+  }
+
+  .premium-chip {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border-radius: 999px;
+    background: hsl(var(--card) / 0.75);
+    backdrop-filter: blur(14px);
+    border: 1px solid hsl(var(--border) / 0.4);
+    box-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+
+  .dark .premium-chip {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px -15px rgba(0, 0, 0, 0.4);
+  }
+
+  .premium-chip:hover {
+    border-color: hsl(var(--primary) / 0.4);
+    background: hsl(var(--primary) / 0.05);
+    transform: translateY(-2px);
+  }
 }
 
 /* =========================================================

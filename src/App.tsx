@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -14,14 +14,26 @@ import Github from "@/pages/GitHub";
 import Resume from "@/pages/Resume";
 import Contact from "@/pages/Contact";
 
+import AIChatbot from "@/components/ai/AIChatbot";
+import AdminPanel from "@/components/admin/AdminPanel";
+import ScrollProgress from "@/components/effects/ScrollProgress";
+import GrainOverlay from "@/components/effects/GrainOverlay";
+import CursorGlow from "@/components/effects/CursorGlow";
+
 export default function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
     <>
       <ScrollToTop />
-      <Navbar />
+      {!isAdminRoute && <ScrollProgress />}
+      {!isAdminRoute && <GrainOverlay />}
+      {!isAdminRoute && <CursorGlow />}
+      {!isAdminRoute && <Navbar />}
 
-      {/* Push content below fixed navbar */}
-      <main className="pt-20">
+      {/* Push content below fixed navbar, except in admin panel */}
+      <main className={isAdminRoute ? "" : "pt-20"}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -32,10 +44,12 @@ export default function App() {
           <Route path="/github" element={<Github />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<AdminPanel />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <AIChatbot />}
     </>
   );
 }
