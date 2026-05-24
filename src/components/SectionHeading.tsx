@@ -29,7 +29,7 @@ export function SectionHeading({
       )}
       style={{ willChange: "opacity, transform" }}
     >
-      <h2 className="inline-block text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text">
+      <h2 className="inline-block text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text py-2 leading-tight">
         {title}
       </h2>
 

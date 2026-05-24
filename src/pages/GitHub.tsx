@@ -163,9 +163,12 @@ function ContributionHeatmap() {
           )}
         </div>
 
-        <div className="flex gap-2 select-none overflow-x-auto pb-4">
+        <div 
+          className="flex gap-2 select-none overflow-x-auto pb-4"
+          onMouseLeave={() => setHoveredCell(null)}
+        >
           {/* Row labels (Days) */}
-          <div className="flex flex-col justify-between py-1 text-[9px] text-muted-foreground/40 h-[112px] font-mono pr-1 select-none">
+          <div className="flex flex-col justify-between py-1.5 text-[9px] text-muted-foreground/40 h-[110px] font-mono pr-1 select-none">
             <span>{days[0]}</span>
             <span>{days[2]}</span>
             <span>{days[4]}</span>
@@ -180,12 +183,9 @@ function ContributionHeatmap() {
               ))}
             </div>
 
-            <div 
-              className="grid grid-rows-7 gap-1.5 min-w-[700px]"
-              onMouseLeave={() => setHoveredCell(null)}
-            >
+            <div className="grid grid-rows-7 gap-0.5 min-w-[700px]">
               {generatedContributions.grid.map((row, rowIndex) => (
-                <div key={rowIndex} className="flex gap-1.5">
+                <div key={rowIndex} className="flex gap-0.5">
                   {row.map((cellData, colIndex) => {
                     const dist = hoveredCell
                       ? Math.sqrt(Math.pow(rowIndex - hoveredCell.row, 2) + Math.pow(colIndex - hoveredCell.col, 2))
@@ -215,7 +215,7 @@ function ContributionHeatmap() {
                             commits: cellData.commits,
                           });
                         }}
-                        className="w-2.5 h-2.5 relative flex items-center justify-center cursor-pointer"
+                        className="w-3.5 h-3.5 relative flex items-center justify-center cursor-pointer"
                       >
                         <motion.div
                           initial={{ opacity: 0, scale: 0.6 }}
@@ -231,12 +231,12 @@ function ContributionHeatmap() {
                             delay: isReady ? 0 : (rowIndex * 52 + colIndex) * 0.0003,
                           }}
                           className={`
-                            w-full h-full rounded-sm pointer-events-none
+                            w-2.5 h-2.5 rounded-sm pointer-events-none
                             ${level === 0 && "bg-neutral-800/30 border border-neutral-700/10"}
-                            ${level === 1 && "bg-primary/20"}
-                            ${level === 2 && "bg-primary/45 shadow-[0_0_6px_hsl(var(--primary)/0.2)]"}
-                            ${level === 3 && "bg-primary/70 shadow-[0_0_10px_hsl(var(--primary)/0.4)]"}
-                            ${level === 4 && "bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.7)]"}
+                            ${level === 1 && "bg-primary/20 border border-primary/10"}
+                            ${level === 2 && "bg-primary/45 border border-primary/20 shadow-[0_0_6px_rgba(212,180,135,0.25)]"}
+                            ${level === 3 && "bg-primary/70 border border-primary/45 shadow-[0_0_10px_rgba(212,180,135,0.45)]"}
+                            ${level === 4 && "bg-primary border border-primary shadow-[0_0_14px_rgba(212,180,135,0.75)]"}
                           `}
                         />
                       </div>
