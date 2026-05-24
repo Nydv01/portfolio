@@ -181,30 +181,19 @@ function ContributionHeatmap() {
                       ? Math.sqrt(Math.pow(rowIndex - hoveredCell.row, 2) + Math.pow(colIndex - hoveredCell.col, 2))
                       : null;
 
+                    const isSelfHovered = hoveredCell && hoveredCell.row === rowIndex && hoveredCell.col === colIndex;
+
                     const rippleScale = dist !== null && dist <= 3
                       ? 1 + (3 - dist) * 0.15
                       : 1;
 
+                    const scale = isSelfHovered ? 1.45 : rippleScale;
+                    const zIndex = isSelfHovered ? 20 : 1;
                     const level = cellData.level;
 
                     return (
-                      <motion.div
+                      <div
                         key={`${rowIndex}-${colIndex}`}
-                        initial={{ opacity: 0, scale: 0.6 }}
-                        animate={{
-                          scale: rippleScale,
-                          opacity: dist !== null && dist <= 3 ? 0.75 + (3 - dist) * 0.08 : 1,
-                        }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 250,
-                          damping: 18,
-                          delay: dist !== null ? 0 : (rowIndex * 52 + colIndex) * 0.0003,
-                        }}
-                        whileHover={{
-                          scale: 1.45,
-                          zIndex: 20,
-                        }}
                         onMouseEnter={() => {
                           setHoveredCell({
                             row: rowIndex,
@@ -215,15 +204,31 @@ function ContributionHeatmap() {
                           });
                         }}
                         onMouseLeave={() => setHoveredCell(null)}
-                        className={`
-                          w-2.5 h-2.5 rounded-sm cursor-pointer transition-all duration-300
-                          ${level === 0 && "bg-neutral-800/30 border border-neutral-700/10"}
-                          ${level === 1 && "bg-primary/20"}
-                          ${level === 2 && "bg-primary/45 shadow-[0_0_6px_hsl(var(--primary)/0.2)]"}
-                          ${level === 3 && "bg-primary/70 shadow-[0_0_10px_hsl(var(--primary)/0.4)]"}
-                          ${level === 4 && "bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.7)]"}
-                        `}
-                      />
+                        className="w-2.5 h-2.5 relative flex items-center justify-center cursor-pointer"
+                      >
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.6 }}
+                          animate={{
+                            scale: scale,
+                            zIndex: zIndex,
+                            opacity: dist !== null && dist <= 3 ? 0.75 + (3 - dist) * 0.08 : 1,
+                          }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 250,
+                            damping: 18,
+                            delay: dist !== null ? 0 : (rowIndex * 52 + colIndex) * 0.0003,
+                          }}
+                          className={`
+                            w-full h-full rounded-sm pointer-events-none
+                            ${level === 0 && "bg-neutral-800/30 border border-neutral-700/10"}
+                            ${level === 1 && "bg-primary/20"}
+                            ${level === 2 && "bg-primary/45 shadow-[0_0_6px_hsl(var(--primary)/0.2)]"}
+                            ${level === 3 && "bg-primary/70 shadow-[0_0_10px_hsl(var(--primary)/0.4)]"}
+                            ${level === 4 && "bg-primary shadow-[0_0_14px_hsl(var(--primary)/0.7)]"}
+                          `}
+                        />
+                      </div>
                     );
                   })}
                 </div>
