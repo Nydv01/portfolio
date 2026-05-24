@@ -130,6 +130,13 @@ function ContributionHeatmap() {
     commits: number;
   } | null>(null);
 
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsReady(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -173,7 +180,10 @@ function ContributionHeatmap() {
               ))}
             </div>
 
-            <div className="grid grid-rows-7 gap-1.5 min-w-[700px]">
+            <div 
+              className="grid grid-rows-7 gap-1.5 min-w-[700px]"
+              onMouseLeave={() => setHoveredCell(null)}
+            >
               {generatedContributions.grid.map((row, rowIndex) => (
                 <div key={rowIndex} className="flex gap-1.5">
                   {row.map((cellData, colIndex) => {
@@ -184,11 +194,13 @@ function ContributionHeatmap() {
                     const isSelfHovered = hoveredCell && hoveredCell.row === rowIndex && hoveredCell.col === colIndex;
 
                     const rippleScale = dist !== null && dist <= 3
-                      ? 1 + (3 - dist) * 0.15
+                      ? 1 + (3 - dist) * 0.12
                       : 1;
 
                     const scale = isSelfHovered ? 1.45 : rippleScale;
-                    const zIndex = isSelfHovered ? 20 : 1;
+                    const zIndex = isSelfHovered 
+                      ? 20 
+                      : (dist !== null && dist <= 3 ? 10 - Math.floor(dist) : 1);
                     const level = cellData.level;
 
                     return (
@@ -203,7 +215,6 @@ function ContributionHeatmap() {
                             commits: cellData.commits,
                           });
                         }}
-                        onMouseLeave={() => setHoveredCell(null)}
                         className="w-2.5 h-2.5 relative flex items-center justify-center cursor-pointer"
                       >
                         <motion.div
@@ -211,13 +222,13 @@ function ContributionHeatmap() {
                           animate={{
                             scale: scale,
                             zIndex: zIndex,
-                            opacity: dist !== null && dist <= 3 ? 0.75 + (3 - dist) * 0.08 : 1,
+                            opacity: dist !== null && dist <= 3 ? 0.8 + (3 - dist) * 0.06 : 1,
                           }}
                           transition={{
                             type: "spring",
-                            stiffness: 250,
-                            damping: 18,
-                            delay: dist !== null ? 0 : (rowIndex * 52 + colIndex) * 0.0003,
+                            stiffness: 180,
+                            damping: 22,
+                            delay: isReady ? 0 : (rowIndex * 52 + colIndex) * 0.0003,
                           }}
                           className={`
                             w-full h-full rounded-sm pointer-events-none
