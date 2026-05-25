@@ -209,7 +209,7 @@ export const defaultContent: PortfolioContent = {
         'Built secure authentication & preference engine',
       ],
       githubUrl: 'https://github.com/Nydv01/wanderglow-ai-planner.git',
-      liveUrl: null,
+      liveUrl: 'https://wanderglow-ai-planner.onrender.com',
       imageUrl: '',
       featured: true,
       caseStudy: {
@@ -385,7 +385,7 @@ export const defaultContent: PortfolioContent = {
         'Built professional PDF report generation and download service',
       ],
       githubUrl: 'https://github.com/Nydv01/chemviz-analytics.git',
-      liveUrl: null,
+      liveUrl: 'https://chemviz-frontend.onrender.com',
       imageUrl: '',
       featured: false,
       order: 8,

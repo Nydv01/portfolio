@@ -22,6 +22,22 @@ function loadFromStorage(): PortfolioContent {
         if (parsed[key] && Array.isArray(parsed[key]) && defaultContent[key] && Array.isArray(defaultContent[key])) {
           const parsedItems = parsed[key] as any[];
           const defaultItems = defaultContent[key] as any[];
+
+          // Sync liveUrl / githubUrl if they are null/missing in parsed but exist in defaults
+          if (key === 'projects') {
+            for (const parsedItem of parsedItems) {
+              const defaultItem = defaultItems.find(item => (item.id && item.id === parsedItem.id) || (item.title && item.title === parsedItem.title));
+              if (defaultItem) {
+                if (!parsedItem.liveUrl && defaultItem.liveUrl) {
+                  parsedItem.liveUrl = defaultItem.liveUrl;
+                }
+                if (!parsedItem.githubUrl && defaultItem.githubUrl) {
+                  parsedItem.githubUrl = defaultItem.githubUrl;
+                }
+              }
+            }
+          }
+
           const parsedIds = new Set(parsedItems.map((item: any) => item.id || item.title || item.name));
           
           const newItems = defaultItems.filter(item => !parsedIds.has(item.id || item.title || item.name));
