@@ -20,8 +20,20 @@ function loadFromStorage(): PortfolioContent {
       const arrayKeys: Array<keyof PortfolioContent> = ['projects', 'timeline', 'certifications', 'achievements', 'skills'];
       for (const key of arrayKeys) {
         if (parsed[key] && Array.isArray(parsed[key]) && defaultContent[key] && Array.isArray(defaultContent[key])) {
-          const parsedItems = parsed[key] as any[];
+          let parsedItems = parsed[key] as any[];
           const defaultItems = defaultContent[key] as any[];
+
+          // Clean up default items that have been deleted/removed from defaultContent.ts
+          const defaultIds = new Set(defaultItems.map((item: any) => item.id).filter(Boolean));
+          parsedItems = parsedItems.filter((item: any) => {
+            if (item.id && typeof item.id === 'string') {
+              const isDefaultId = /^(proj-|tl-|cert-|sk-|id-|ach-|soc-)\d+$/.test(item.id);
+              if (isDefaultId && !defaultIds.has(item.id)) {
+                return false;
+              }
+            }
+            return true;
+          });
 
           // Sync liveUrl / githubUrl if they are null/missing in parsed but exist in defaults
           if (key === 'projects') {
@@ -39,13 +51,11 @@ function loadFromStorage(): PortfolioContent {
           }
 
           const parsedIds = new Set(parsedItems.map((item: any) => item.id || item.title || item.name));
-          
           const newItems = defaultItems.filter(item => !parsedIds.has(item.id || item.title || item.name));
-          if (newItems.length > 0) {
-            parsed[key] = [...parsedItems, ...newItems];
-            if (typeof (parsed[key][0]?.order) === 'number') {
-              (parsed[key] as any[]).sort((a, b) => a.order - b.order);
-            }
+          
+          parsed[key] = [...parsedItems, ...newItems];
+          if (typeof (parsed[key][0]?.order) === 'number') {
+            (parsed[key] as any[]).sort((a, b) => a.order - b.order);
           }
         }
       }

@@ -477,17 +477,6 @@ export const defaultContent: PortfolioContent = {
       order: 4,
     },
     {
-      id: 'tl-6',
-      year: 'Nov 2025 – Jan 2026',
-      title: 'Software Engineering Intern',
-      institution: 'Frigoglass India Pvt. Ltd.',
-      description:
-        'Contributed to the Technical Department (CSE/IT) on key projects including the Smart Campus Platform (Nexus). Developed backend services using Python & Django, performed database schema and query optimizations with SQL, and integrated frontend UI components. Evaluated performance was rated excellent with a strong foundation in CSE principles.',
-      icon: 'Briefcase',
-      linkUrl: 'https://drive.google.com/file/d/16J4bQbQWaQ0bR0VZvgZFR4OvAbUi3mi2/view?usp=sharing',
-      order: 5,
-    },
-    {
       id: 'tl-7',
       year: '2024',
       title: 'Event Management Team Member',
@@ -495,7 +484,7 @@ export const defaultContent: PortfolioContent = {
       description:
         'Co-organized campus-wide technical events and workshops, managing operations, logistics, and participant outreach.',
       icon: 'Users',
-      order: 6,
+      order: 5,
     },
   ],
 
